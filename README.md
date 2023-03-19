@@ -1,3 +1,3 @@
-# Vue 3 + TypeScript + Vite + Vue Router
+# Vue + Pocketbase template
 
-Template repo
+pocket base as backend and vue as frontend
