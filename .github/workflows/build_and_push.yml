@@ -5,6 +5,10 @@ on:
     types: [created]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build_and_push:
     if: startsWith(github.ref, 'refs/tags')
