@@ -1,0 +1,31 @@
+name: Upload to ghrc.io
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build_and_push:
+    if: startsWith(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.ref_name }}
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
