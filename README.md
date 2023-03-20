@@ -2,7 +2,15 @@
 
 pocket base as backend and vue as frontend
 
-## Run locally
+## Run
+
+You can specify a pesistant volume to store the data (`./pb_data`)
+
+```bash
+docker run -p 8080:8080 -v ./pb_data:/pb_data --name vue-pocket felipereyel/vue-pocketbase
+```
+
+## Run locally (dev mode)
 
 ```bash
 docker compose up --build
