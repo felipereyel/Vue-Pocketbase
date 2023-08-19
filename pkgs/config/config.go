@@ -13,5 +13,5 @@ type envs struct {
 
 var Envs = envs{
 	PublicDir:   os.Getenv("PUBLIC_DIR"),
-	Automigrate: os.Getenv("AUTOMIGRATE_OFF") != "true",
+	Automigrate: os.Getenv("AUTOMIGRATE") == "true",
 }
