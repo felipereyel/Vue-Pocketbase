@@ -3,22 +3,24 @@
   <div v-if="loading">
     <h2>Loading...</h2>
   </div>
-  <div v-else>
+  <div v-else-if="result">
     <ul>
-      <li v-for="note in notes" :key="note.id">
+      <li v-for="note in result.notes" :key="note.id">
         <router-link :to="{ name: 'noteEditor', params: { id: note.id } }">
           {{ note.title }}
         </router-link>
       </li>
     </ul>
   </div>
+  <div v-else>
+    <h2>Not found</h2>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { NoteModel } from '../models/notes';
-import { asyncComputed } from '../utils/vue';
+import { query } from '.';
 
-const { result: notes, loading } = asyncComputed(() => NoteModel.getAllNotes());
+const { result, loading } = query();
 </script>
 
 <style scoped></style>

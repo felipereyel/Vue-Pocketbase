@@ -18,17 +18,6 @@ export class NoteModel extends BaseModel<"notes"> {
     return new NoteModel(dto);
   }
 
-  static async getNoteById(id: string) {
-    const result = await super.getById("notes", id);
-    if (!result) return null;
-    return new NoteModel(result);
-  }
-
-  static async getAllNotes() {
-    const result = await super.getSome("notes");
-    return result.map(NoteModel.from);
-  }
-
   get content() {
     return this.dto.content;
   }

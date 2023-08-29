@@ -16,6 +16,7 @@ type Metadata = {
       created: string;
       updated: string;
     };
+    expandable: {};
   };
 };
 
@@ -33,3 +34,13 @@ export type updateArgs<T extends TableName> = Partial<Update<T>>;
 // Insert
 type Insert<T extends TableName> = Table<T>["insert"];
 export type insertArgs<T extends TableName> = Insert<T>;
+
+// Expandable
+type Expandable<T extends TableName> = Table<T>["expandable"];
+export type expandableArgs<T extends TableName> = keyof Expandable<T>;
+export type expandedArgs<T extends TableName, A extends Array<expandableArgs<T>>> = {
+  expand: {
+    //@ts-ignore
+    [K in A[number]]: selectArgs<Metadata[T]['expandable'][K]>;
+  }
+}
